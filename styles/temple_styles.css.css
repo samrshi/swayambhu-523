@@ -1,0 +1,19 @@
+.annotation {
+    opacity: 1 !important;
+}
+
+.annotation-titlebar {
+    opacity: 0.5;
+}
+
+.annotation-description {
+    border-radius: 10px;
+    text-align: center;
+    width: auto;
+}
+
+#video-annotation-icon {
+    height: 30px;
+    margin: auto;
+    padding: 5px 0px;
+}
