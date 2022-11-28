@@ -19,7 +19,7 @@
 	"scripts": {
 		"start": "gulp watch",
 		"build": "gulp build pack",
-		"postinstall": "npm run build; live-server"
+		"postinstall": "npm run build"
 	},
 	"dependencies": {
 		"gulp": "^4.0.2",
