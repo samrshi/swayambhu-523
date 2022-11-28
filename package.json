@@ -17,7 +17,7 @@
 	],
 	"main": "./build/potree/potree.js",
 	"scripts": {
-		"start": "gulp watch",
+		"start": "live-server",
 		"build": "gulp build pack",
 		"postinstall": "npm run build"
 	},
