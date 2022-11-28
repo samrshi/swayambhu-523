@@ -2,168 +2,168 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Potree Viewer</title>
+	<meta charset="utf-8">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<title>Swayambhu Stories</title>
 
-    <link rel="stylesheet" type="text/css" href="./build/potree/potree.css">
-    <link rel="stylesheet" type="text/css" href="./libs/jquery-ui/jquery-ui.min.css">
-    <link rel="stylesheet" type="text/css" href="./libs/openlayers3/ol.css">
-    <link rel="stylesheet" type="text/css" href="./libs/spectrum/spectrum.css">
-    <link rel="stylesheet" type="text/css" href="./libs/jstree/themes/mixed/style.css">
-    <link rel="stylesheet" type="text/css" href="./styles/temple_styles.css">
+	<link rel="stylesheet" type="text/css" href="./build/potree/potree.css">
+	<link rel="stylesheet" type="text/css" href="./libs/jquery-ui/jquery-ui.min.css">
+	<link rel="stylesheet" type="text/css" href="./libs/openlayers3/ol.css">
+	<link rel="stylesheet" type="text/css" href="./libs/spectrum/spectrum.css">
+	<link rel="stylesheet" type="text/css" href="./libs/jstree/themes/mixed/style.css">
+	<link rel="stylesheet" type="text/css" href="./styles/temple_styles.css">
 </head>
 
 <body>
-    <script src="./libs/jquery/jquery-3.1.1.min.js"></script>
-    <script src="./libs/spectrum/spectrum.js"></script>
-    <script src="./libs/jquery-ui/jquery-ui.min.js"></script>
+	<script src="./libs/jquery/jquery-3.1.1.min.js"></script>
+	<script src="./libs/spectrum/spectrum.js"></script>
+	<script src="./libs/jquery-ui/jquery-ui.min.js"></script>
 
 
-    <script src="./libs/other/BinaryHeap.js"></script>
-    <script src="./libs/tween/tween.min.js"></script>
-    <script src="./libs/d3/d3.js"></script>
-    <script src="./libs/proj4/proj4.js"></script>
-    <script src="./libs/openlayers3/ol.js"></script>
-    <script src="./libs/i18next/i18next.js"></script>
-    <script src="./libs/jstree/jstree.js"></script>
-    <script src="./build/potree/potree.js"></script>
-    <script src="./libs/plasio/js/laslaz.js"></script>
+	<script src="./libs/other/BinaryHeap.js"></script>
+	<script src="./libs/tween/tween.min.js"></script>
+	<script src="./libs/d3/d3.js"></script>
+	<script src="./libs/proj4/proj4.js"></script>
+	<script src="./libs/openlayers3/ol.js"></script>
+	<script src="./libs/i18next/i18next.js"></script>
+	<script src="./libs/jstree/jstree.js"></script>
+	<script src="./build/potree/potree.js"></script>
+	<script src="./libs/plasio/js/laslaz.js"></script>
 
-    <!-- INCLUDE ADDITIONAL DEPENDENCIES HERE -->
-    <!-- INCLUDE SETTINGS HERE -->
+	<!-- INCLUDE ADDITIONAL DEPENDENCIES HERE -->
+	<!-- INCLUDE SETTINGS HERE -->
 
-    <div class="potree_container" style="position: absolute; width: 100%; height: 100%; left: 0px; top: 0px; ">
-        <div id="potree_render_area" style="background-image: url('../build/potree/resources/images/background.jpg');">
-        </div>
-        <div id="potree_sidebar_container"> </div>
-    </div>
+	<div class="potree_container" style="position: absolute; width: 100%; height: 100%; left: 0px; top: 0px; ">
+		<div id="potree_render_area" style="background-image: url('../build/potree/resources/images/background.jpg');">
+		</div>
+		<div id="potree_sidebar_container"> </div>
+	</div>
 
-    <script type="module">
+	<script type="module">
 
-        import * as THREE from "./libs/three.js/build/three.module.js";
+		import * as THREE from "./libs/three.js/build/three.module.js";
 
-        window.viewer = new Potree.Viewer(document.getElementById("potree_render_area"));
+		window.viewer = new Potree.Viewer(document.getElementById("potree_render_area"));
 
-        viewer.setEDLEnabled(false);
-        viewer.setFOV(60);
-        viewer.setPointBudget(1_000_000);
-        viewer.loadSettingsFromURL();
-        viewer.setBackground("skybox");
-        viewer.setDescription("");
-        const annoVisibleDistance = 10;
+		viewer.setEDLEnabled(false);
+		viewer.setFOV(60);
+		viewer.setPointBudget(1_000_000);
+		viewer.loadSettingsFromURL();
+		viewer.setBackground("skybox");
+		viewer.setDescription("");
+		const annoVisibleDistance = 10;
 
-        viewer.loadGUI(() => {
-            viewer.setLanguage('en');
-            $("#menu_appearance").next().show();
-            //viewer.toggleSidebar();
+		viewer.loadGUI(() => {
+			viewer.setLanguage('en');
+			$("#menu_appearance").next().show();
+			//viewer.toggleSidebar();
 
-            document.getElementById("video-0").addEventListener("mouseleave", (e) => {
-                e.target.pause();
-            });
-        });
+			document.getElementById("video-0").addEventListener("mouseleave", (e) => {
+				e.target.pause();
+			});
+		});
 
-        // load temple model
-        Potree.loadPointCloud("./assets/swayambhu-converted/metadata.json", "temple", function (e) {
-            const scene = viewer.scene;
-            scene.addPointCloud(e.pointcloud);
+		// load temple model
+		Potree.loadPointCloud("./assets/swayambhu-converted/metadata.json", "temple", function (e) {
+			const scene = viewer.scene;
+			scene.addPointCloud(e.pointcloud);
 
-            let material = e.pointcloud.material;
-            material.size = 1;
-            material.pointSizeType = Potree.PointSizeType.ADAPTIVE;
+			let material = e.pointcloud.material;
+			material.size = 1;
+			material.pointSizeType = Potree.PointSizeType.ADAPTIVE;
 
-            scene.view.setView(
-                [331474.338, 3066783.461, 1383.500],
-                [331466.170, 3066790.464, 1383.757],
-            );
+			scene.view.setView(
+				[331474.338, 3066783.461, 1383.500],
+				[331466.170, 3066790.464, 1383.757],
+			);
 
-            // add annotations
-            {
-                let imageAnnotation = new Potree.Annotation({
-                    position: [331466.170, 3066790.464, 1383.757],
-                    "cameraPosition": [331474.338, 3066783.461, 1383.500],
-                    "cameraTarget": [331466.170, 3066790.464, 1383.757],
-                    "title": "Prostration",
-                    "description": `
+			// add annotations
+			{
+				let imageAnnotation = new Potree.Annotation({
+					position: [331466.170, 3066790.464, 1383.757],
+					"cameraPosition": [331474.338, 3066783.461, 1383.500],
+					"cameraTarget": [331466.170, 3066790.464, 1383.757],
+					"title": "Prostration",
+					"description": `
 						<img src="assets/prostrations.jpg" 
 							name="prostrations"
 							class="annotation-image" 
 							style="width:350px;" />
 					`
-                });
-                scene.annotations.add(imageAnnotation);
-            }
-            {
-                let videoAnnotation = new Potree.Annotation({
-                    position: [331470.545, 3066791.449, 1382.434],
-                    "cameraPosition": [331473.948, 3066792.197, 1383.500],
-                    "cameraTarget": [331470.398, 3066792.163, 1382.285],
-                    "title": `
+				});
+				scene.annotations.add(imageAnnotation);
+			}
+			{
+				let videoAnnotation = new Potree.Annotation({
+					position: [331470.545, 3066791.449, 1382.434],
+					"cameraPosition": [331473.948, 3066792.197, 1383.500],
+					"cameraTarget": [331470.398, 3066792.163, 1382.285],
+					"title": `
 						<div id="video-annotation-icon">
 						<img src="assets/video.png" style="width: 30px" alt="video button">
 						</div>
 						`,
-                    "description": `
+					"description": `
 						<video id="video-0" width="350" controls>
   						<source src="assets/v0.mp4" type="video/mp4">
 						Your browser does not support the video tag.
 						</video>
 					`
-                });
-                scene.annotations.add(videoAnnotation);
-            }
-            {
-                let audioAnnotation = new Potree.Annotation({
-                    position: [331468.531, 3066785.226, 1382.118],
-                    "cameraPosition": [331471.306, 3066787.181, 1383.500],
-                    "cameraTarget": [331468.036, 3066785.989, 1382.406],
-                    title: "Audio Annotation",
-                    "description": `
+				});
+				scene.annotations.add(videoAnnotation);
+			}
+			{
+				let audioAnnotation = new Potree.Annotation({
+					position: [331468.531, 3066785.226, 1382.118],
+					"cameraPosition": [331471.306, 3066787.181, 1383.500],
+					"cameraTarget": [331468.036, 3066785.989, 1382.406],
+					title: "Audio Annotation",
+					"description": `
 					<audio controls>
   					<source src="assets/a0.mp3" type="audio/mp3">
 					</audio>
 					<p>Read <a target="_blank" href="https://docs.google.com/document/d/1MbxiHrA1Y_0N_ksNTH_Q75vcSH2n_1CfE2qYDC7JO-0/edit?usp=sharing">full translation</a>.</p>
 					`
-                });
-                scene.annotations.add(audioAnnotation);
-            }
+				});
+				scene.annotations.add(audioAnnotation);
+			}
 
-            viewer.addEventListener("update", () => {
-                scene.view.position.z = 1383.5;
-                let cameraPos = scene.view.position;
-                let annos = scene.annotations.children;
-                // check if annotations should display
-                for (let i = 0; i < annos.length; i++) {
-                    let show = checkIfDisplay(cameraPos, annos[i].cameraPosition)
-                    if (show) {
-                        annos[i].visible = true;
-                    }
-                    else {
-                        annos[i].visible = false;
-                    }
-                }
-                // change height based on landscape?
+			viewer.addEventListener("update", () => {
+				scene.view.position.z = 1383.5;
+				let cameraPos = scene.view.position;
+				let annos = scene.annotations.children;
+				// check if annotations should display
+				for (let i = 0; i < annos.length; i++) {
+					let show = checkIfDisplay(cameraPos, annos[i].cameraPosition)
+					if (show) {
+						annos[i].visible = true;
+					}
+					else {
+						annos[i].visible = false;
+					}
+				}
+				// change height based on landscape?
 
-                // gets target point
-                // console.log(scene.view.getPivot());
+				// gets target point
+				// console.log(scene.view.getPivot());
 
-                // fix camera orientation
-                //scene.view.pitch = 0.1;
-            });
+				// fix camera orientation
+				//scene.view.pitch = 0.1;
+			});
 
-            //viewer.fitToScreen();
+			//viewer.fitToScreen();
 
-        });
+		});
 
 
-        function checkIfDisplay(cameraPos, annoPos) {
-            let distance = Math.sqrt((cameraPos.x - annoPos.x) ** 2 + (cameraPos.y - annoPos.y) ** 2 + (cameraPos.z - annoPos.z) ** 2)
-            if (distance >= annoVisibleDistance) return false;
-            return true;
-        }
-    </script>
+		function checkIfDisplay(cameraPos, annoPos) {
+			let distance = Math.sqrt((cameraPos.x - annoPos.x) ** 2 + (cameraPos.y - annoPos.y) ** 2 + (cameraPos.z - annoPos.z) ** 2)
+			if (distance >= annoVisibleDistance) return false;
+			return true;
+		}
+	</script>
 
 
 </body>
