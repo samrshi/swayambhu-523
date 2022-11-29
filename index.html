@@ -37,7 +37,8 @@
 	<!-- INCLUDE ADDITIONAL DEPENDENCIES HERE -->
 	<!-- INCLUDE SETTINGS HERE -->
 
-	<div class="potree_container" style="position: absolute; width: 100%; height: 100%; left: 0px; top: 0px; ">
+	<div class="potree_container" style="position: absolute; width: 100%; height: 100%; left: 0px; top: 0px; "
+		autofocus>
 		<div id="potree_render_area" style="background-image: url('../build/potree/resources/images/background.jpg');">
 		</div>
 		<div id="potree_sidebar_container"> </div>
@@ -54,19 +55,31 @@
 		viewer.setPointBudget(1_000_000);
 		viewer.loadSettingsFromURL();
 		viewer.setBackground("skybox");
-		viewer.setDescription("");
 		viewer.useHQ = true;
 
 		const annoVisibleDistance = 10;
 
+		let focus = () => {
+			console.log("focusing")
+			$("canvas").focus()
+		};
+
 		viewer.loadGUI(() => {
 			viewer.setLanguage('en');
 			$("#menu_appearance").next().show();
-			//viewer.toggleSidebar();
 
-			document.getElementById("video-0").addEventListener("mouseleave", (e) => {
-				e.target.pause();
-			});
+			// Set arrow key navigation and move speed
+			viewer.setControls(viewer.fpControls);
+			viewer.setMoveSpeed(5);
+
+			// Play/pause video on mouse enter/leave
+			$("#video-0").on("mouseleave", e => { e.target.pause() });
+			$("#video-0").on("mouseenter", e => { e.target.play() });
+
+			$(".annotation").change(() => { focus() })
+
+			// Focus on the canvas element to enable arrow key navigation without clicking
+			focus()
 		});
 
 		// load temple model
