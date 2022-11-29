@@ -4,6 +4,8 @@
 
 .annotation-titlebar {
     opacity: 0.5;
+	width: 30px;
+	padding: 7px;
 }
 
 .annotation-description {
