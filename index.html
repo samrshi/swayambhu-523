@@ -86,7 +86,6 @@
 		Potree.loadPointCloud("./assets/swayambhu-converted/metadata.json", "temple", function (e) {
 			const scene = viewer.scene;
 			scene.addPointCloud(e.pointcloud);
-
 			let material = e.pointcloud.material;
 			material.size = 1;
 			material.pointSizeType = Potree.PointSizeType.ADAPTIVE;
@@ -149,6 +148,30 @@
 					`
 				});
 				scene.annotations.add(audioAnnotation);
+			}
+			{
+				let annoSwayambhuOverview = new Potree.Annotation({
+					position: [331448.402, 3066800.466, 1389.327],
+					"cameraPosition": [331441.118, 3066815.411, 1383.500],
+					"cameraTarget": [331448.011, 3066803.350, 1389.160],
+					"title": "Prostration",
+					"description": `
+						<p>Swayambhu is an ancient religious complex atop a hill in the Kathmandu Valley, west of Kathmandu city. The Tibetan name for the site means 'Sublime Trees', for the many varieties of trees found on the hill. The complex consists of a stupa, a variety of shrines and temples, some dating back to the Licchavi period. A Tibetan monastery, museum and library are more recent additions.</p>
+					`
+				});
+				scene.annotations.add(annoSwayambhuOverview);
+			}
+			{
+				let annoStupa = new Potree.Annotation({
+					position: [331458.329, 3066802.083, 1389.261],
+					"cameraPosition": [331460.205, 3066817.482, 1383.500],
+					"cameraTarget": [331457.004, 3066809.044, 1384.455],
+					"title": "Prostration",
+					"description": `
+						<p>The stupa has Buddha's eyes and eyebrows painted on looking in all four directions. Between them, the number one (in Devanagari script) is painted in the fashion of a nose. The top of the stupa is covered in 20 kilograms of gold. Surrounding it are various temples and shrines that have been added over the centuries.</p>
+					`
+				});
+				scene.annotations.add(annoStupa);
 			}
 
 			viewer.addEventListener("update", () => {
