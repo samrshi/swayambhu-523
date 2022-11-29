@@ -80,7 +80,7 @@
 			$("#video-0").on("mouseleave", e => { e.target.pause() });
 			$("#video-0").on("mouseenter", e => { e.target.play() });
 
-			$(".annotation").change(() => { focus() })
+			$(".annotation").on("mouseleave", e => { focus() });
 
 			// Focus on the canvas element to enable arrow key navigation without clicking
 			focus()
@@ -95,36 +95,52 @@
 			material.pointSizeType = Potree.PointSizeType.ADAPTIVE;
 
 			scene.view.setView(
-				[331474.338, 3066783.461, 1383.500],
-				[331466.170, 3066790.464, 1383.757],
+				[331440.007, 3066816.373, 1383.500],
+				[331442.191, 3066812.134, 1384.796],
 			);
 
 			// add annotations
+			// image annotations
 			{
-				let imageAnnotation = new Potree.Annotation({
-					position: [331466.170, 3066790.464, 1383.757],
-					"cameraPosition": [331474.338, 3066783.461, 1383.500],
-					"cameraTarget": [331466.170, 3066790.464, 1383.757],
+				let annoProstration = new Potree.Annotation({
+					position: [331432.083, 3066797.398, 1384.207],
+					"cameraPosition": [331438.541, 3066795.255, 1383.500],
+					"cameraTarget": [331431.820, 3066801.008, 1383.930],
 					"title": "Prostration",
 					"description": `
 						<img src="assets/prostrations.jpg" 
 							name="prostrations"
 							class="annotation-image" 
 							style="width:350px;" />
+						<p>description of prostration</p>
 					`
 				});
-				scene.annotations.add(imageAnnotation);
+				scene.annotations.add(annoProstration);
 			}
 			{
-				let videoAnnotation = new Potree.Annotation({
-					position: [331470.545, 3066791.449, 1382.434],
-					"cameraPosition": [331473.948, 3066792.197, 1383.500],
-					"cameraTarget": [331470.398, 3066792.163, 1382.285],
-					"title": `
-						<div class="annotation-icon">
-						<img src="icons/video.png" style="width: 30px" alt="video button">
-						</div>
-						`,
+				let annoStair = new Potree.Annotation({
+					position: [331474.916, 3066788.081, 1381.644],
+					"cameraPosition": [331470.888, 3066793.072, 1383.500],
+					"cameraTarget": [331472.957, 3066790.825, 1381.305],
+					"title": "Eastern Stairway",
+					"description": `
+						<img src="icons/stair.png" 
+							name="stairway"
+							class="annotation-image" 
+							style="width:350px;" />
+						<p class="anno-p">Buddhist and Hindu Pilgrims ascend the 365 steps stairway to the east of the hill to reach the Vajra. Tsultrim Allione describes the experience:</p>
+						<p class="anno-p"><em>We were breathless and sweating as we stumbled up the last steep steps and practically fell upon the biggest vajra (thunderbolt scepter) that I have ever seen. Behind this Vajra was the vast, round, white dome of the stupa, like a full solid skirt, at the top of which were two giant Buddha eyes wisely looking out over the peaceful valley which was just beginning to come alive.</em></p>
+					`
+				});
+				scene.annotations.add(annoStair);
+			}
+			// video annotations
+			{
+				let annoHistoryAndImportance = new Potree.Annotation({
+					position: [331430.461, 3066791.639, 1384.893],
+					"cameraPosition": [331434.576, 3066789.911, 1383.500],
+					"cameraTarget": [331428.138, 3066795.720, 1385.304],
+					"title": "History and Importance of Swayambhunath",
 					"description": `
 						<video id="video-0" width="350" controls>
   						<source src="assets/v0.mp4" type="video/mp4">
@@ -132,18 +148,15 @@
 						</video>
 					`
 				});
-				scene.annotations.add(videoAnnotation);
+				scene.annotations.add(annoHistoryAndImportance);
 			}
+			// audio annotations
 			{
-				let audioAnnotation = new Potree.Annotation({
-					position: [331468.531, 3066785.226, 1382.118],
-					"cameraPosition": [331471.306, 3066787.181, 1383.500],
-					"cameraTarget": [331468.036, 3066785.989, 1382.406],
-					title: `
-						<div class="annotation-icon">
-						<img src="icons/audio.png" style="width: 30px" alt="audio button">
-						</div>
-						`,
+				let annoRitualCycle = new Potree.Annotation({
+					position: [331434.851, 3066814.428, 1384.949],
+					"cameraPosition": [331446.143, 3066812.613, 1383.500],
+					"cameraTarget": [331445.140, 3066812.355, 1383.795],
+					title: "Ritual Cycle and Change",
 					"description": `
 					<audio controls>
   					<source src="assets/a0.mp3" type="audio/mp3">
@@ -151,16 +164,17 @@
 					<p>Read <a target="_blank" href="https://docs.google.com/document/d/1MbxiHrA1Y_0N_ksNTH_Q75vcSH2n_1CfE2qYDC7JO-0/edit?usp=sharing">full translation</a>.</p>
 					`
 				});
-				scene.annotations.add(audioAnnotation);
+				scene.annotations.add(annoRitualCycle);
 			}
+			// text annotations
 			{
 				let annoSwayambhuOverview = new Potree.Annotation({
 					position: [331448.402, 3066800.466, 1389.327],
 					"cameraPosition": [331441.118, 3066815.411, 1383.500],
 					"cameraTarget": [331448.011, 3066803.350, 1389.160],
-					"title": "Prostration",
+					"title": "Swayambhu",
 					"description": `
-						<p>Swayambhu is an ancient religious complex atop a hill in the Kathmandu Valley, west of Kathmandu city. The Tibetan name for the site means 'Sublime Trees', for the many varieties of trees found on the hill. The complex consists of a stupa, a variety of shrines and temples, some dating back to the Licchavi period. A Tibetan monastery, museum and library are more recent additions.</p>
+						<p class="anno-p">Swayambhu is an ancient religious complex atop a hill in the Kathmandu Valley, west of Kathmandu city. The Tibetan name for the site means 'Sublime Trees', for the many varieties of trees found on the hill. The complex consists of a stupa, a variety of shrines and temples, some dating back to the Licchavi period. A Tibetan monastery, museum and library are more recent additions.</p>
 					`
 				});
 				scene.annotations.add(annoSwayambhuOverview);
@@ -170,9 +184,9 @@
 					position: [331458.329, 3066802.083, 1389.261],
 					"cameraPosition": [331460.205, 3066817.482, 1383.500],
 					"cameraTarget": [331457.004, 3066809.044, 1384.455],
-					"title": "Prostration",
+					"title": "Stupa",
 					"description": `
-						<p>The stupa has Buddha's eyes and eyebrows painted on looking in all four directions. Between them, the number one (in Devanagari script) is painted in the fashion of a nose. The top of the stupa is covered in 20 kilograms of gold. Surrounding it are various temples and shrines that have been added over the centuries.</p>
+						<p class="anno-p">The stupa has Buddha's eyes and eyebrows painted on looking in all four directions. Between them, the number one (in Devanagari script) is painted in the fashion of a nose. The top of the stupa is covered in 20 kilograms of gold. Surrounding it are various temples and shrines that have been added over the centuries.</p>
 					`
 				});
 				scene.annotations.add(annoStupa);
@@ -192,8 +206,6 @@
 						annos[i].visible = false;
 					}
 				}
-				// change height based on landscape?
-
 				// gets target point
 				// console.log(scene.view.getPivot());
 
