@@ -1,6 +1,6 @@
 # Swayambhu Stories
 
-COMP 523 Team D Client Project
+COMP 523 Team D Client Project. Forked from https://github.com/potree/potree
 
 ## To Test Locally
 1. Clone this repository
