@@ -2,6 +2,10 @@
 
 COMP 523 Team D Client Project. Forked from https://github.com/potree/potree
 
+## View Deployment
+
+https://swayambhu-stories.cloudapps.unc.edu
+
 ## To Test Locally
 1. Clone this repository
    ```
