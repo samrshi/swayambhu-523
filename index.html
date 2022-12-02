@@ -77,8 +77,8 @@
 			viewer.setMoveSpeed(5);
 
 			// Play/pause video on mouse enter/leave
-			$("#video-0").on("mouseleave", e => { e.target.pause() });
-			$("#video-0").on("mouseenter", e => { e.target.play() });
+			$(".video-annotation").on("mouseleave", e => { e.target.pause() });
+			$(".video-annotation").on("mouseenter", e => { e.target.play() });
 
 			$(".annotation").on("mouseleave", e => { focus() });
 
@@ -142,13 +142,28 @@
 					"cameraTarget": [331428.138, 3066795.720, 1385.304],
 					"title": "History and Importance of Swayambhunath",
 					"description": `
-						<video id="video-0" width="350" controls>
+						<video class="video-annotation" width="350" controls>
   						<source src="assets/v0.mp4" type="video/mp4">
 						Your browser does not support the video tag.
 						</video>
 					`
 				});
 				scene.annotations.add(annoHistoryAndImportance);
+			}
+			{
+				let annoPowerOfWorship = new Potree.Annotation({
+					position: [331442.15, 3066799.31, 1383.11],
+					"cameraPosition": [331440.007, 3066816.373, 1383.500],
+					"cameraTarget": [331442.15, 3066799.31, 1383.11],
+					"title": "Power of Worship",
+					"description": `
+						<video class="video-annotation" width="350" controls>
+  						<source src="assets/worship.mov" type="video/mp4">
+						Your browser does not support the video tag.
+						</video>
+					`
+				});
+				scene.annotations.add(annoPowerOfWorship);
 			}
 			// audio annotations
 			{
