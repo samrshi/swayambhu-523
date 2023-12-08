@@ -51,4 +51,8 @@ You might notice that the `assets` directory's [`.gitignore`](./assets/.gitignor
    > **Hint** - It should have a format something like `swayambhu-stories-[n]-[id]`
 7. Use [`rsync`](https://www.digitalocean.com/community/tutorials/how-to-use-rsync-to-sync-local-and-remote-directories) to push those new files to the CloudApps persistent storage.
    > **Hint** - See the `Files` section of [this article](https://help.unc.edu/sp?sys_kb_id=2136cb72db5c341070551ffa6896197b&id=kb_article_view&sysparm_rank=2&sysparm_tsqueryId=e27179f71b1bd55078c43112cd4bcb03) for some more details.
+   ```bash
+   # Example command:
+   oc rsync --progress assets <pod-name>:/opt/app-root/src/
+   ```
 8. You might not need to, but triggering a new build couldn't hurt
